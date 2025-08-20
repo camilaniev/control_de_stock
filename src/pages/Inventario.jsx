@@ -15,6 +15,7 @@ import {
 } from '@heroicons/react/24/solid'
 import Productos from './Productos'
 import Categorias from './Categorias'
+import EnDesarrollo from './EnDesarrollo'
 
 export default function Inventario() {
   const navigate = useNavigate()
@@ -44,6 +45,7 @@ export default function Inventario() {
   // qué mostrar en el panel derecho
   const showProductos = location.pathname === '/inventario/productos'
   const showCategorias = location.pathname === '/inventario/categorias'
+  const showEnDesarrollo = location.pathname.startsWith('/inventario/en-desarrollo')
 
   return (
     <div className="h-screen min-h-0 overflow-hidden flex bg-[#FFF5EE]">
@@ -52,7 +54,6 @@ export default function Inventario() {
         {/* BG imagen del panel izquierdo */}
         <div
           className="absolute inset-0 bg-cover bg-center"
-          // Cambiá 'panel.jpg' por el nombre real de tu archivo
           style={{ backgroundImage: "url('/fondoPanel.png')" }}
           aria-hidden="true"
         />
@@ -93,15 +94,27 @@ export default function Inventario() {
             </div>
             {openOps && (
               <div className="space-y-1">
-                <div className={dropdownItem}>
+                <Link
+                  to="/inventario/en-desarrollo"
+                  state={{ feature: 'Transferencias' }}
+                  className={dropdownItem}
+                >
                   <span className="text-[#EE3223] mr-2">·</span>Transferencias
-                </div>
-                <div className={dropdownItem}>
+                </Link>
+                <Link
+                  to="/inventario/en-desarrollo"
+                  state={{ feature: 'Ajustes de Inventario' }}
+                  className={dropdownItem}
+                >
                   <span className="text-[#EE3223] mr-2">·</span>Ajustes de Inventario
-                </div>
-                <div className={dropdownItem}>
+                </Link>
+                <Link
+                  to="/inventario/en-desarrollo"
+                  state={{ feature: 'Desechar' }}
+                  className={dropdownItem}
+                >
                   <span className="text-[#EE3223] mr-2">·</span>Desechar
-                </div>
+                </Link>
               </div>
             )}
 
@@ -139,12 +152,20 @@ export default function Inventario() {
             </div>
             {openInf && (
               <div className="space-y-1">
-                <div className={dropdownItem}>
+                <Link
+                  to="/inventario/en-desarrollo"
+                  state={{ feature: 'Informe de inventario' }}
+                  className={dropdownItem}
+                >
                   <span className="text-[#EE3223] mr-2">·</span>Informe de inventario
-                </div>
-                <div className={dropdownItem}>
+                </Link>
+                <Link
+                  to="/inventario/en-desarrollo"
+                  state={{ feature: 'Movimiento de productos' }}
+                  className={dropdownItem}
+                >
                   <span className="text-[#EE3223] mr-2">·</span>Movimiento de productos
-                </div>
+                </Link>
               </div>
             )}
 
@@ -162,15 +183,27 @@ export default function Inventario() {
             </div>
             {openCfg && (
               <div className="space-y-1">
-                <div className={dropdownItem}>
+                <Link
+                  to="/inventario/en-desarrollo"
+                  state={{ feature: 'Ajustes' }}
+                  className={dropdownItem}
+                >
                   <span className="text-[#EE3223] mr-2">·</span>Ajustes
-                </div>
-                <div className={dropdownItem}>
+                </Link>
+                <Link
+                  to="/inventario/en-desarrollo"
+                  state={{ feature: 'Almacenes' }}
+                  className={dropdownItem}
+                >
                   <span className="text-[#EE3223] mr-2">·</span>Almacenes
-                </div>
-                <div className={dropdownItem}>
+                </Link>
+                <Link
+                  to="/inventario/en-desarrollo"
+                  state={{ feature: 'Tipos de operaciones' }}
+                  className={dropdownItem}
+                >
                   <span className="text-[#EE3223] mr-2">·</span>Tipos de operaciones
-                </div>
+                </Link>
                 <Link to="/inventario/categorias" className={dropdownItem}>
                   <span className="text-[#EE3223] mr-2">·</span>Categorías de productos
                 </Link>
@@ -203,7 +236,6 @@ export default function Inventario() {
         {/* BG imagen del panel derecho */}
         <div
           className="absolute inset-0 bg-cover bg-center"
-          // Cambiá 'inventory.jpg' por el nombre real de tu archivo
           style={{ backgroundImage: "url('/fondoInventario.png')" }}
           aria-hidden="true"
         />
@@ -212,17 +244,16 @@ export default function Inventario() {
 
         {/* Contenido del panel derecho */}
         <div className="relative p-8">
-        {showProductos ? (
-        <Productos />
-      ) : showCategorias ? (
-        <Categorias />
-      ) : (
-      <div className="text-gray-600">
-      Selecciona una opción del menú.
+          {showProductos ? (
+            <Productos />
+          ) : showCategorias ? (
+            <Categorias />
+          ) : showEnDesarrollo ? (
+            <EnDesarrollo />
+          ) : (
+            <div className="text-gray-600">Selecciona una opción del menú.</div>
+          )}
         </div>
-        )}
-      </div>
-
       </main>
     </div>
   )

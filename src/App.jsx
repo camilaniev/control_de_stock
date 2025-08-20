@@ -5,6 +5,7 @@ import Login from './pages/Login'
 import Inventario from './pages/Inventario'
 import './index.css' // o App.css si ahí tenés estilos globales
 
+
 function App() {
   return (
     <Router>
@@ -15,6 +16,7 @@ function App() {
         {/* Ruta profunda para la sección Productos dentro de Inventario */}
         <Route path="/inventario/productos" element={<Inventario />} />
         <Route path="/inventario/categorias" element={<Inventario />} />
+        <Route path="/inventario/en-desarrollo" element={<Inventario />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
